@@ -1,16 +1,14 @@
-%define		kdeappsver	18.12.0
+%define		kdeappsver	18.12.1
 %define		qtver		5.9.0
 %define		kaname		dragon
-######		Unknown group!
-######		Unknown group!
 Summary:	Dragon Player
 Name:		ka5-%{kaname}
-Version:	18.12.0
+Version:	18.12.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
-Group:		X11/Multimedia
+Group:		X11/Applications/Multimedia
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	8e38c3c28338792910798eed0861f88a
+# Source0-md5:	abb29908f0604f742b1289233f60712e
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -33,6 +31,7 @@ BuildRequires:	kf5-kwidgetsaddons-devel >= 5.31.0
 BuildRequires:	kf5-kwindowsystem-devel >= 5.31.0
 BuildRequires:	kf5-kxmlgui-devel >= 5.31.0
 BuildRequires:	kf5-solid-devel >= 5.31.0
+BuildRequires:	ninja
 BuildRequires:	phonon-qt5-devel >= 4.6.60
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
@@ -54,14 +53,14 @@ I might still rename it.)
 install -d build
 cd build
 %cmake \
+	-G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	..
-%{__make}
+%ninja_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} -C build install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 %find_lang %{kaname} --all-name --with-kde
 
@@ -85,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/22x22/actions/player-volume-muted.png
 %{_iconsdir}/oxygen/32x32/actions/player-volume-muted.png
 %{_iconsdir}/oxygen/48x48/actions/player-volume-muted.png
-#%{_iconsdir}/oxygen/scalable/actions/player-volume-muted.svgz
+%{_iconsdir}/oxygen/scalable/actions/player-volume-muted.svgz
 %{_datadir}/kservices5/ServiceMenus/dragonplayer_play_dvd.desktop
 %{_datadir}/kservices5/dragonplayer_part.desktop
 %dir %{_datadir}/kxmlgui5/dragonplayer
