@@ -1,36 +1,37 @@
-%define		kdeappsver	18.12.1
+%define		kdeappsver	19.04.1
+%define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		dragon
 Summary:	Dragon Player
 Name:		ka5-%{kaname}
-Version:	18.12.1
+Version:	19.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	abb29908f0604f742b1289233f60712e
+# Source0-md5:	320f03e3df4bca1d254ec12ec0f3fee9
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
 BuildRequires:	Qt5Widgets-devel
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	gettext-devel
-BuildRequires:	kf5-extra-cmake-modules >= 5.53.0
-BuildRequires:	kf5-kconfig-devel >= 5.31.0
-BuildRequires:	kf5-kconfigwidgets-devel >= 5.31.0
-BuildRequires:	kf5-kcoreaddons-devel >= 5.31.0
-BuildRequires:	kf5-kcrash-devel >= 5.31.0
-BuildRequires:	kf5-kdbusaddons-devel >= 5.31.0
-BuildRequires:	kf5-kdoctools-devel >= 5.31.0
-BuildRequires:	kf5-ki18n-devel >= 5.31.0
-BuildRequires:	kf5-kio-devel >= 5.31.0
-BuildRequires:	kf5-kjobwidgets-devel >= 5.31.0
-BuildRequires:	kf5-knotifications-devel >= 5.31.0
-BuildRequires:	kf5-kparts-devel >= 5.31.0
-BuildRequires:	kf5-kwidgetsaddons-devel >= 5.31.0
-BuildRequires:	kf5-kwindowsystem-devel >= 5.31.0
-BuildRequires:	kf5-kxmlgui-devel >= 5.31.0
-BuildRequires:	kf5-solid-devel >= 5.31.0
+BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf5-kconfig-devel >= %{kframever}
+BuildRequires:	kf5-kconfigwidgets-devel >= %{kframever}
+BuildRequires:	kf5-kcoreaddons-devel >= %{kframever}
+BuildRequires:	kf5-kcrash-devel >= %{kframever}
+BuildRequires:	kf5-kdbusaddons-devel >= %{kframever}
+BuildRequires:	kf5-kdoctools-devel >= %{kframever}
+BuildRequires:	kf5-ki18n-devel >= %{kframever}
+BuildRequires:	kf5-kio-devel >= %{kframever}
+BuildRequires:	kf5-kjobwidgets-devel >= %{kframever}
+BuildRequires:	kf5-knotifications-devel >= %{kframever}
+BuildRequires:	kf5-kparts-devel >= %{kframever}
+BuildRequires:	kf5-kwidgetsaddons-devel >= %{kframever}
+BuildRequires:	kf5-kwindowsystem-devel >= %{kframever}
+BuildRequires:	kf5-kxmlgui-devel >= %{kframever}
+BuildRequires:	kf5-solid-devel >= %{kframever}
 BuildRequires:	ninja
 BuildRequires:	phonon-qt5-devel >= 4.6.60
 BuildRequires:	qt5-build >= %{qtver}
@@ -54,6 +55,7 @@ install -d build
 cd build
 %cmake \
 	-G Ninja \
+	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	..
 %ninja_build
@@ -62,6 +64,7 @@ cd build
 rm -rf $RPM_BUILD_ROOT
 %ninja_install -C build
 
+rm -rf $RPM_BUILD_ROOT%{_kdedocdir}/sr
 %find_lang %{kaname} --all-name --with-kde
 
 %clean
@@ -71,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 /etc/xdg/dragonplayerrc
 %attr(755,root,root) %{_bindir}/dragon
-%attr(755,root,root) %{_libdir}/qt5/plugins/dragonpart.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/parts/dragonpart.so
 %{_desktopdir}/org.kde.dragonplayer.desktop
 %{_iconsdir}/hicolor/128x128/apps/dragonplayer.png
 %{_iconsdir}/hicolor/16x16/apps/dragonplayer.png
@@ -87,9 +90,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/scalable/actions/player-volume-muted.svgz
 %{_datadir}/kservices5/ServiceMenus/dragonplayer_play_dvd.desktop
 %{_datadir}/kservices5/dragonplayer_part.desktop
-%dir %{_datadir}/kxmlgui5/dragonplayer
-%{_datadir}/kxmlgui5/dragonplayer/dragonlogo.png
-%{_datadir}/kxmlgui5/dragonplayer/dragonplayerui.rc
 %lang(ca) %{_mandir}/ca/man1/dragon.1*
 %lang(de) %{_mandir}/de/man1/dragon.1*
 %lang(es) %{_mandir}/es/man1/dragon.1*
