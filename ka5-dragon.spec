@@ -47,6 +47,13 @@ originally developed by Max Howell and called Codeine. I ported it to
 KDE 4.0 and on Max's suggestion renamed it to Video Player (probably,
 I might still rename it.)
 
+%description -l pl.UTF-8
+Dragon to bardzo prosty odtwarzacz multimediów bazujący na Phononie.
+Pierwsza wersja została napisana przez Maxa Howella i była nazwana Codeine.
+Potem została przeportowana do KDE 4.0, a za sugestią Maxa została
+przemianowana na Video Player (prawdopobnie jeszcze kiedyś zmienię
+jej nazwę.)
+
 %prep
 %setup -q -n %{kaname}-%{version}
 
