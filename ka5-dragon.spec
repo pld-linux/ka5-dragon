@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.2
+%define		kdeappsver	22.12.3
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		dragon
 Summary:	Dragon Player
 Name:		ka5-%{kaname}
-Version:	22.12.2
+Version:	22.12.3
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	3ef9da8c70deaf18d4ed8a8672c12a8f
+# Source0-md5:	92ed1f9f6c7359875dacd2b6d52e0e5c
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -118,7 +118,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt_BR) %{_mandir}/pt_BR/man1/dragon.1*
 %lang(sr) %{_mandir}/sr/man1/dragon.1*
 %lang(sv) %{_mandir}/sv/man1/dragon.1*
-%lang(tr) %{_mandir}/tr/man1/dragon.1*
 %lang(uk) %{_mandir}/uk/man1/dragon.1*
 %{_datadir}/metainfo/org.kde.dragonplayer.appdata.xml
 %{_datadir}/solid/actions/dragonplayer-openaudiocd.desktop
